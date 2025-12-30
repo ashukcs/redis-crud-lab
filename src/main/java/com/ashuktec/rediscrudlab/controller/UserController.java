@@ -22,7 +22,6 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        log.info("entered createUser method");
         user.setUserId(UUID.randomUUID().toString());
         User user1 = userService.saveUser(user);
         return new ResponseEntity<>(user1, HttpStatus.CREATED);
@@ -30,7 +29,6 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        log.info("entered updateUser method");
         User userToBeUpdated = userService.getUser(user.getUserId());
         if(!ObjectUtils.isEmpty(userToBeUpdated)) {
             user.setUserId(UUID.randomUUID().toString());
@@ -44,7 +42,6 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable String userId) {
-        log.info("entered getUser method");
         User user1 = userService.getUser(userId);
         return new ResponseEntity<>(user1, HttpStatus.FOUND);
     }
@@ -56,7 +53,6 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
-        log.info("entered deleteUser method");
         userService.deleteUser(userId);
         log.info("User : {} deleted Successfully!", userId);
         return new ResponseEntity<>(HttpStatus.OK);
