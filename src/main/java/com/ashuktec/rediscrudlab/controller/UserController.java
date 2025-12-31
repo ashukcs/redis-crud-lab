@@ -31,7 +31,6 @@ public class UserController {
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         User userToBeUpdated = userService.getUser(user.getUserId());
         if(!ObjectUtils.isEmpty(userToBeUpdated)) {
-            user.setUserId(UUID.randomUUID().toString());
             User user1 = userService.saveUser(user);
             return new ResponseEntity<>(user1, HttpStatus.CREATED);
         } else {
